@@ -7,12 +7,20 @@
 #SBATCH --nodes 1                  
 #SBATCH --cpus-per-task=96             
 #SBATCH --mem=1000G
+
 source /home/popov/miniconda3/bin/activate
 conda activate /home/popov/miniconda3/envs/apopov
+layer=5
+number_sequences=100
+
+export layer
+export number_sequences
+
 for i in intergenic_regions exons introns 5UTR 3UTR 
 do 
+
 export i 
+
 srun python3.8 /beegfs/data/hpcws/ws1/popov-transformer_work/Nucleotide_trans.py
 done
 srun python3.8 /beegfs/data/hpcws/ws1/popov-transformer_work/tSNE.py
-              
